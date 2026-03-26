@@ -1,3 +1,12 @@
+---
+title: Smart Store Manager
+emoji: 🏪
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+pinned: false
+---
+
 # 🏪 SmartStore Manager
 
 A full-stack retail store management platform built for small businesses in India. Manages inventory, billing, suppliers, reports, and alerts — all in one place.
