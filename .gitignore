@@ -4,3 +4,9 @@ node_modules/
 .DS_Store
 dist/
 build/
+
+# PostgreSQL Portable Database Setup
+postgres/
+postgres-bin.zip
+pw.txt
+logfile

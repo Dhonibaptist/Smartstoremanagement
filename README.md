@@ -1,38 +1,38 @@
----
-title: Smart Store Manager
-emoji: 🏪
-colorFrom: indigo
-colorTo: purple
-sdk: docker
-pinned: false
----
-
 # 🏪 SmartStore Manager
 
 A full-stack retail store management platform built for small businesses in India. Manages inventory, billing, suppliers, reports, and alerts — all in one place.
 
 ---
 
-## 🚀 Quick Start (Docker — Recommended)
+## 🚀 Quick Start (Windows — Local PostgreSQL Setup)
 
-### Prerequisites
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+This project is configured to run fully locally on Windows using a portable, zero-install PostgreSQL database setup.
 
-### Run Everything in One Command
+### 1. Setup Database & Start Server
+Right-click `install-pg.ps1` and select **Run with PowerShell** (or run it from a PowerShell terminal):
+```powershell
+./install-pg.ps1
+```
+This script will automatically download the portable PostgreSQL binaries, initialize the database cluster, set the default password to `postgres123`, and start the database server.
 
+### 2. Run the Application
+
+#### Backend API
 ```bash
-git clone <your-repo-url>
-cd smart-store-manager
-docker compose up --build
+cd backend
+npm install
+cp .env.example .env  # edit DB credentials if necessary
+npm run dev           # starts on port 5000
 ```
 
-Wait ~2 minutes for the first build, then open:
+#### Frontend Dashboard
+```bash
+cd frontend
+npm install
+npm start             # starts on port 3000
+```
 
-| Service | URL |
-|---------|-----|
-| 🌐 **Frontend** | http://localhost:3000 |
-| ⚙️ **Backend API** | http://localhost:5000/api |
-| 🐘 **PostgreSQL** | localhost:5432 |
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Default Login
 | Role | Email | Password |
@@ -60,7 +60,6 @@ smart-store-manager/
 │   │   ├── routes/
 │   │   │   └── index.js     # All API routes
 │   │   └── index.js         # Entry point + cron jobs
-│   ├── Dockerfile
 │   ├── package.json
 │   └── .env
 │
@@ -89,10 +88,9 @@ smart-store-manager/
 │   │   ├── index.js
 │   │   └── index.css        # Global design system
 │   ├── nginx.conf           # Nginx with API proxy
-│   ├── Dockerfile
 │   └── package.json
 │
-├── docker-compose.yml
+├── install-pg.ps1            # Windows Portable PG installer
 └── README.md
 ```
 
@@ -108,7 +106,6 @@ smart-store-manager/
 | Database | PostgreSQL 15 |
 | Auth | JWT (JSON Web Tokens) + bcryptjs |
 | Cron Jobs | node-cron |
-| Container | Docker + Docker Compose |
 | Proxy | Nginx (API proxy + SPA routing) |
 
 ---
@@ -260,10 +257,9 @@ npm start             # starts on port 3000
 
 ## 🚀 Production Deployment
 
-1. Change `JWT_SECRET` in `docker-compose.yml`
-2. Change `DB_PASSWORD` to a strong password
-3. Add SSL/TLS via Nginx reverse proxy or Cloudflare
-4. Set `REACT_APP_API_URL` to your domain
+1. Change `JWT_SECRET` and `DB_PASSWORD` in your production `.env` config.
+2. Add SSL/TLS via Nginx reverse proxy or Cloudflare.
+3. Set `REACT_APP_API_URL` to your domain.
 
 ---
 
