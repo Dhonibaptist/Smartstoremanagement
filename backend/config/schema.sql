@@ -189,7 +189,7 @@ ON CONFLICT (name) DO NOTHING;
 
 -- Seed Default Owner (password: password)
 INSERT INTO users (name, email, password, role_id, phone) VALUES
-('Store Owner', 'owner@store.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '+919876543210')
+('Store Owner', 'owner@store.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', (SELECT id FROM roles WHERE name = 'owner'), '+919876543210')
 ON CONFLICT (email) DO NOTHING;
 
 -- Seed Categories
@@ -214,16 +214,16 @@ ON CONFLICT (name) DO NOTHING;
 
 -- Seed Products
 INSERT INTO products (name, sku, barcode, category_id, supplier_id, purchase_price, selling_price, tax_percent, stock_quantity, reorder_level, unit) VALUES
-('Aashirvaad Atta 5kg', 'GR001', '8901063111111', 1, 1, 220, 265, 0, 45, 10, 'bag'),
-('Tata Salt 1kg', 'GR002', '8901234567890', 1, 1, 18, 24, 0, 120, 20, 'pack'),
-('Amul Butter 500g', 'DA001', '8901234000001', 2, 3, 230, 275, 12, 30, 8, 'pack'),
-('Amul Milk 1L', 'DA002', '8901234000002', 2, 3, 58, 68, 0, 60, 15, 'litre'),
-('Coca Cola 2L', 'BV001', '8901234111001', 3, 1, 68, 90, 28, 40, 12, 'bottle'),
-('Parle-G Biscuits 200g', 'SN001', '8901719100005', 4, 4, 22, 30, 18, 200, 30, 'pack'),
-('Lays Classic 26g', 'SN002', '8901234222001', 4, 1, 18, 25, 18, 85, 20, 'pack'),
-('Colgate Max Fresh 150g', 'PC001', '8901234333001', 5, 2, 65, 85, 18, 55, 10, 'tube'),
-('Dettol Soap 75g', 'PC002', '8901234444001', 5, 2, 32, 45, 18, 70, 15, 'bar'),
-('Surf Excel 1kg', 'HH001', '8901234555001', 6, 2, 105, 135, 18, 35, 8, 'pack'),
-('Bread Brown 400g', 'BK001', '8901234666001', 8, 1, 32, 45, 0, 25, 5, 'pack'),
-('Maggi Noodles 70g', 'SN003', '8901234777001', 4, 1, 12, 18, 18, 150, 25, 'pack')
+('Aashirvaad Atta 5kg', 'GR001', '8901063111111', (SELECT id FROM categories WHERE name = 'Grocery'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 220, 265, 0, 45, 10, 'bag'),
+('Tata Salt 1kg', 'GR002', '8901234567890', (SELECT id FROM categories WHERE name = 'Grocery'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 18, 24, 0, 120, 20, 'pack'),
+('Amul Butter 500g', 'DA001', '8901234000001', (SELECT id FROM categories WHERE name = 'Dairy'), (SELECT id FROM suppliers WHERE name = 'Amul Dairy'), 230, 275, 12, 30, 8, 'pack'),
+('Amul Milk 1L', 'DA002', '8901234000002', (SELECT id FROM categories WHERE name = 'Dairy'), (SELECT id FROM suppliers WHERE name = 'Amul Dairy'), 58, 68, 0, 60, 15, 'litre'),
+('Coca Cola 2L', 'BV001', '8901234111001', (SELECT id FROM categories WHERE name = 'Beverages'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 68, 90, 28, 40, 12, 'bottle'),
+('Parle-G Biscuits 200g', 'SN001', '8901719100005', (SELECT id FROM categories WHERE name = 'Snacks'), (SELECT id FROM suppliers WHERE name = 'Parle Biscuits'), 22, 30, 18, 200, 30, 'pack'),
+('Lays Classic 26g', 'SN002', '8901234222001', (SELECT id FROM categories WHERE name = 'Snacks'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 18, 25, 18, 85, 20, 'pack'),
+('Colgate Max Fresh 150g', 'PC001', '8901234333001', (SELECT id FROM categories WHERE name = 'Personal Care'), (SELECT id FROM suppliers WHERE name = 'HUL Distributor'), 65, 85, 18, 55, 10, 'tube'),
+('Dettol Soap 75g', 'PC002', '8901234444001', (SELECT id FROM categories WHERE name = 'Personal Care'), (SELECT id FROM suppliers WHERE name = 'HUL Distributor'), 32, 45, 18, 70, 15, 'bar'),
+('Surf Excel 1kg', 'HH001', '8901234555001', (SELECT id FROM categories WHERE name = 'Household'), (SELECT id FROM suppliers WHERE name = 'HUL Distributor'), 105, 135, 18, 35, 8, 'pack'),
+('Bread Brown 400g', 'BK001', '8901234666001', (SELECT id FROM categories WHERE name = 'Bakery'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 32, 45, 0, 25, 5, 'pack'),
+('Maggi Noodles 70g', 'SN003', '8901234777001', (SELECT id FROM categories WHERE name = 'Snacks'), (SELECT id FROM suppliers WHERE name = 'Metro Cash & Carry'), 12, 18, 18, 150, 25, 'pack')
 ON CONFLICT (sku) DO NOTHING;
