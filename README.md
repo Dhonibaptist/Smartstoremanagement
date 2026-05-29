@@ -37,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ### Default Login
 | Role | Email | Password |
 |------|-------|----------|
-| Owner | `owner@store.com` | `password` |
+| Owner | `owner@store.com` | `Admin@123` |
 
 ---
 
