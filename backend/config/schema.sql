@@ -185,7 +185,7 @@ INSERT INTO roles (name, permissions) VALUES
 ('cashier', '{"billing": true}')
 ON CONFLICT (name) DO NOTHING;
 
--- Seed Default Owner (password: Admin@123)
+-- Seed Default Owner (password: password)
 INSERT INTO users (name, email, password, role_id, phone) VALUES
 ('Store Owner', 'owner@store.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 1, '+919876543210')
 ON CONFLICT (email) DO NOTHING;
