@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS categories (
 -- Suppliers
 CREATE TABLE IF NOT EXISTS suppliers (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
+  name VARCHAR(150) UNIQUE NOT NULL,
   contact_person VARCHAR(100),
   phone VARCHAR(20),
   email VARCHAR(150),
@@ -177,6 +177,8 @@ CREATE INDEX IF NOT EXISTS idx_bills_created ON bills(created_at);
 CREATE INDEX IF NOT EXISTS idx_bill_items_bill ON bill_items(bill_id);
 CREATE INDEX IF NOT EXISTS idx_po_supplier ON purchase_orders(supplier_id);
 CREATE INDEX IF NOT EXISTS idx_audit_user ON audit_logs(user_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_suppliers_name ON suppliers(name);
+
 
 -- Seed Roles
 INSERT INTO roles (name, permissions) VALUES
@@ -208,7 +210,7 @@ INSERT INTO suppliers (name, contact_person, phone, email, gstin) VALUES
 ('HUL Distributor', 'Suresh Shah', '+919811000002', 'suresh@hul.com', '07AABCH5678B1Z3'),
 ('Amul Dairy', 'Priya Patel', '+919811000003', 'priya@amul.com', '24AAAAA0000A1Z5'),
 ('Parle Biscuits', 'Ankit Jain', '+919811000004', 'ankit@parle.com', '27AAACB2345C1Z1')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (name) DO NOTHING;
 
 -- Seed Products
 INSERT INTO products (name, sku, barcode, category_id, supplier_id, purchase_price, selling_price, tax_percent, stock_quantity, reorder_level, unit) VALUES
