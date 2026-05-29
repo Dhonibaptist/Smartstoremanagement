@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Plus, Minus, Trash2, ShoppingCart, CreditCard, Smartphone, Banknote, X, CheckCircle, ScanLine } from 'lucide-react';
+import { Search, Plus, Minus, Trash2, ShoppingCart, CreditCard, Smartphone, Banknote, CheckCircle, ScanLine } from 'lucide-react';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
 

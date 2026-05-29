@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { TrendingUp, TrendingDown, Package } from 'lucide-react';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
@@ -35,6 +35,7 @@ export default function Reports() {
     } catch { toast.error('Failed to load reports'); } finally { setLoading(false); }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(); }, [from, to]);
 
   const totalRevenue = data?.daily?.reduce((s, d) => s + parseFloat(d.revenue), 0) || 0;

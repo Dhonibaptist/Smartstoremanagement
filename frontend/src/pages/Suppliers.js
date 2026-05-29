@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Plus, Truck, Package, FileText, Edit2, Trash2, CheckCircle } from 'lucide-react';
+import { Plus, Truck, FileText, Edit2, Trash2, CheckCircle } from 'lucide-react';
 import api from '../utils/api';
 import toast from 'react-hot-toast';
 
